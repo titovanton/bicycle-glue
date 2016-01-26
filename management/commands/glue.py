@@ -8,6 +8,7 @@ import subprocess
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
+from django.utils.translation import ugettext as _
 
 
 class Command(BaseCommand):
@@ -39,7 +40,7 @@ class Command(BaseCommand):
         try:
             subprocess.call(command)
         except OSError:
-            raise Exception('glue does not exists on your os')
+            raise Exception(_('glue does not exists on your os'))
         else:
 
             if not os.path.exists(conf['move_styles_to']):
@@ -59,4 +60,4 @@ class Command(BaseCommand):
                             try:
                                 subprocess.call(['csscomb', dstdir])
                             except OSError:
-                                raise Exception('csscomb does not exists on your os')
+                                raise Exception(_('csscomb does not exists on your os'))
