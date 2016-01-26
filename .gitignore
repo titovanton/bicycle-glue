@@ -1,0 +1,7 @@
+# Files
+*.pyc
+*.sql
+*.mo
+
+# South
+*/migrations
