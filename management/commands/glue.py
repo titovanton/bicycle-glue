@@ -55,9 +55,11 @@ class Command(BaseCommand):
                     if os.path.isfile(pathname):
                         shutil.move(pathname, dstdir)
 
-                        if conf['csscomb']:
-
+                        if conf.get('csscomb', False):
                             try:
-                                subprocess.call(['csscomb', dstdir])
+                                if conf.get('csscomb_bin', False):
+                                    subprocess.call([conf['csscomb_bin'], dstdir])
+                                else:
+                                    subprocess.call(['csscomb', dstdir])
                             except OSError:
                                 raise Exception(_('csscomb does not exists on your os'))
